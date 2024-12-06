@@ -1,0 +1,21 @@
+:root {
+  --main: #fffff0;
+  --text: #28282b;
+  --pri: #d3d3d3;
+  --extra: #e3963e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--main);
+  color: var(--text);
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

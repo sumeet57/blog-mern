@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/userContext";
 const Register = () => {
+  //user context
+  const { user, setUser } = useUserContext();
+
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -8,8 +13,10 @@ const Register = () => {
   const location = useLocation();
   // console.log(location.pathname);
 
-  const register = async () => {
-    preventDefault();
+  const navigate = useNavigate();
+
+  const register = async (event) => {
+    event.preventDefault();
     const res = await fetch("http://localhost:3000/users/register", {
       method: "POST",
       headers: {
@@ -22,8 +29,30 @@ const Register = () => {
       }),
     });
     const data = await res.json();
-    document.querySelector(".Message").textContent = data.message;
-    console.log(data);
+    console.log(data);  
+
+    if(res.status === 201){
+      const newUser = {
+        username: data.user.username,
+        email: data.user.email,
+        token: data.token,
+      };
+      setUser(newUser);
+      navigate("/home");
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      // console.log(newUser);
+
+      localStorage.setItem("user", JSON.stringify(newUser));
+    }else{
+      if (Array.isArray(data.errors) && data.errors.length > 0) {
+        document.querySelector(".Message").textContent = data.errors[0].msg;
+      } else {
+        document.querySelector(".Message").textContent = data.errors.msg;
+      }
+      // console.log(data.errors);
+    }
   };
   return (
     <>

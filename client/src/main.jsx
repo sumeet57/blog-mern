@@ -19,6 +19,11 @@ import Register from "./pages/Register.jsx"; //done
 import Login from "./pages/login.jsx"; //done
 import Layout from "./pages/Layout.jsx"; //done
 
+//context import
+// import {UserContext} from "./context/userContext.jsx";
+import { UserContextProvider } from "./context/userContext.jsx";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +69,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
   </StrictMode>
 );

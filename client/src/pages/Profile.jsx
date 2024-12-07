@@ -1,6 +1,10 @@
 import React from "react";
 
+import { useUserContext } from "../context/userContext";
+
 const Profile = () => {
+  // const { User, setUser } = useUserContext();
+  // console.log(username.username);
   return (
     <>
       <div className="max-w-2xl mx-auto p-6 bg-var(--main) rounded-lg shadow-md">
@@ -10,13 +14,14 @@ const Profile = () => {
             className="block text-var(--text) text-sm font-bold mb-2"
             htmlFor="username"
           >
-            Username
+            {/* {User.username} */}
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-var(--text) leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Username"
+            onChange={(e) => setUser({ ...username, username: e.target.value })}
           />
         </div>
         <div className="mb-4">

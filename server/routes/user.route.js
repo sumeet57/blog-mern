@@ -17,10 +17,6 @@ router.post(
       .withMessage("Password must be between 6 and 12 characters"),
   ],
   (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
     register(req, res);
   }
 );

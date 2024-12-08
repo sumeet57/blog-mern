@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useUserContext } from "../context/userContext";
+// import ProtectedRouteWrap from "../components/ProtectedRouteWrap";
 
 const Profile = () => {
   // const { User, setUser } = useUserContext();

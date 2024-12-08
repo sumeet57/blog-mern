@@ -1,7 +1,7 @@
 import express from "express";
 import { body, validationResult } from "express-validator";
 const router = express.Router();
-import { register } from "../controllers/user.controllers.js";
+import { register, login } from "../controllers/user.controllers.js";
 import User from "../model/blog.model.js";
 
 router.post(
@@ -18,6 +18,21 @@ router.post(
   ],
   (req, res) => {
     register(req, res);
+  }
+);
+
+router.post(
+  "/login",
+  [
+    body("username")
+      .isLength({ min: 3, max: 20 })
+      .withMessage("Username must be between 3 and 20 characters"),
+    body("password")
+      .isLength({ min: 6, max: 12 })
+      .withMessage("Password must be between 6 and 12 characters"),
+  ],
+  (req, res) => {
+    login(req, res);
   }
 );
 

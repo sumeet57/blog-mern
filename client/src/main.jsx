@@ -23,6 +23,7 @@ import Layout from "./pages/Layout.jsx"; //done
 // import {UserContext} from "./context/userContext.jsx";
 import { UserContextProvider } from "./context/userContext.jsx";
 
+import ProtectedRouteWrap from "./components/ProtectedRouteWrap.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            element: <Profile />,
+            element: (
+              <ProtectedRouteWrap>
+                <Profile />
+              </ProtectedRouteWrap>
+            ),
           },
           {
             path: "blog",

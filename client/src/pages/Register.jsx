@@ -5,7 +5,6 @@ const Register = () => {
   //user context
   const { user, setUser } = useUserContext();
 
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +28,9 @@ const Register = () => {
       }),
     });
     const data = await res.json();
-    console.log(data);  
+    console.log(data);
 
-    if(res.status === 201){
+    if (res.status === 201) {
       const newUser = {
         username: data.user.username,
         email: data.user.email,
@@ -42,10 +41,8 @@ const Register = () => {
       setEmail("");
       setUsername("");
       setPassword("");
-      // console.log(newUser);
-
       localStorage.setItem("user", JSON.stringify(newUser));
-    }else{
+    } else {
       if (Array.isArray(data.errors) && data.errors.length > 0) {
         document.querySelector(".Message").textContent = data.errors[0].msg;
       } else {
